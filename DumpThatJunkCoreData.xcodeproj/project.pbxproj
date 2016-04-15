@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF32FF2B1CC031CB00F34AE8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */; };
 		CF8854311C85439E00373A68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8854301C85439E00373A68 /* AppDelegate.swift */; };
 		CF8854361C85439E00373A68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF8854341C85439E00373A68 /* Main.storyboard */; };
 		CF8854391C85439E00373A68 /* DumpThatJunkCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF8854371C85439E00373A68 /* DumpThatJunkCoreData.xcdatamodeld */; };
@@ -15,8 +16,6 @@
 		CFB321461CB1E74C00143DD0 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB321451CB1E74C00143DD0 /* AddTableViewCell.swift */; };
 		CFB3214A1CB2223D00143DD0 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB321491CB2223D00143DD0 /* CameraViewController.swift */; };
 		CFB3214E1CB227A200143DD0 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB3214D1CB227A200143DD0 /* ButtonCell.swift */; };
-		CFF079981CBB72BC00412A6E /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF079971CBB72BC00412A6E /* SearchTableViewController.swift */; };
-		CFF0799A1CBB765A00412A6E /* Candy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF079991CBB765A00412A6E /* Candy.swift */; };
 		CFF1C7AF1C8BEAB9008407C5 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1C7AE1C8BEAB9008407C5 /* MenuTableViewController.swift */; };
 		CFF1C7B71C8D1DF4008407C5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1C7B61C8D1DF4008407C5 /* AddLocationViewController.swift */; };
 		CFF1C7D81C9135E6008407C5 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1C7D21C9135E6008407C5 /* Item+CoreDataProperties.swift */; };
@@ -31,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CF87232B1CA9059900640297 /* DumpThatJunkCoreData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DumpThatJunkCoreData 2.xcdatamodel"; sourceTree = "<group>"; };
 		CF88542D1C85439E00373A68 /* DumpThatJunkCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DumpThatJunkCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF8854301C85439E00373A68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -42,8 +42,6 @@
 		CFB321451CB1E74C00143DD0 /* AddTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		CFB321491CB2223D00143DD0 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CFB3214D1CB227A200143DD0 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
-		CFF079971CBB72BC00412A6E /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		CFF079991CBB765A00412A6E /* Candy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candy.swift; sourceTree = "<group>"; };
 		CFF1C7AE1C8BEAB9008407C5 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		CFF1C7B61C8D1DF4008407C5 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		CFF1C7D21C9135E6008407C5 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -107,8 +105,7 @@
 				CFB321451CB1E74C00143DD0 /* AddTableViewCell.swift */,
 				CFB321491CB2223D00143DD0 /* CameraViewController.swift */,
 				CFB3214D1CB227A200143DD0 /* ButtonCell.swift */,
-				CFF079971CBB72BC00412A6E /* SearchTableViewController.swift */,
-				CFF079991CBB765A00412A6E /* Candy.swift */,
+				CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */,
 			);
 			path = DumpThatJunkCoreData;
 			sourceTree = "<group>";
@@ -187,6 +184,7 @@
 				CFB321461CB1E74C00143DD0 /* AddTableViewCell.swift in Sources */,
 				CFF1C7DA1C9135E6008407C5 /* Location+CoreDataProperties.swift in Sources */,
 				CFF1C7DC1C9135E6008407C5 /* Unit+CoreDataProperties.swift in Sources */,
+				CF32FF2B1CC031CB00F34AE8 /* SearchViewController.swift in Sources */,
 				CFF1C7D81C9135E6008407C5 /* Item+CoreDataProperties.swift in Sources */,
 				CFF1C7AF1C8BEAB9008407C5 /* MenuTableViewController.swift in Sources */,
 				CF8854391C85439E00373A68 /* DumpThatJunkCoreData.xcdatamodeld in Sources */,
@@ -197,9 +195,7 @@
 				CFF1C7B71C8D1DF4008407C5 /* AddLocationViewController.swift in Sources */,
 				CFF1C7D91C9135E6008407C5 /* Item.swift in Sources */,
 				CFB3214A1CB2223D00143DD0 /* CameraViewController.swift in Sources */,
-				CFF0799A1CBB765A00412A6E /* Candy.swift in Sources */,
 				CFF1C7E11C97D2BC008407C5 /* BoxTableViewController.swift in Sources */,
-				CFF079981CBB72BC00412A6E /* SearchTableViewController.swift in Sources */,
 				CF8854311C85439E00373A68 /* AppDelegate.swift in Sources */,
 				CFF1C7DF1C93A17D008407C5 /* AddTableViewController.swift in Sources */,
 			);

@@ -14,9 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        /*
         let splitViewController = window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
@@ -25,23 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         UISearchBar.appearance().barTintColor = UIColor.candyGreen()
         UISearchBar.appearance().tintColor = UIColor.whiteColor()
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.candyGreen()
-        return true
-    }
-    
-    // MARK: - Split view
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
-        /*
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController
-            else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? AddTableViewController
-            else { return false }
-        
-        if topAsDetailController.detailCandy == nil {
-            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-            return true
-        }
+         
          */
-        return false
+        return true
     }
     
     func applicationWillResignActive(application: UIApplication) {

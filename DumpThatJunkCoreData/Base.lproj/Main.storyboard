@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uzW-hL-6M7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uzW-hL-6M7">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -32,7 +32,7 @@
                     <connections>
                         <segue destination="Fm9-mg-CQG" kind="show" identifier="AddLocationSegue" id="yge-DC-guO"/>
                         <segue destination="bzj-ke-VcN" kind="show" identifier="AddSegue" id="mml-dl-HiO"/>
-                        <segue destination="wcK-qg-zvb" kind="show" identifier="SearchSegue" id="wee-sJ-nse"/>
+                        <segue destination="pwh-nd-e9s" kind="show" identifier="SearchSegue" id="8nQ-vI-xUY"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHX-7H-oXe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,6 +89,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63k-b1-ZzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2898" y="1067.25"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="aWr-5S-1OY">
+            <objects>
+                <viewController id="pwh-nd-e9s" userLabel="Search View Controller" customClass="SearchViewController" customModule="DumpThatJunkCoreData" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tek-i0-DCL"/>
+                        <viewControllerLayoutGuide type="bottom" id="gLW-WY-a2A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Mp-cv-MOT">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zDG-Fk-cu9">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="cr1-Cf-PyP">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cr1-Cf-PyP" id="NgE-Vf-NZL">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="108" width="400" height="692"/>
+                                </variation>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="BRe-Vf-oMG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="44"/>
+                                </variation>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="zDG-Fk-cu9"/>
+                                <exclude reference="BRe-Vf-oMG"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="zDG-Fk-cu9"/>
+                                <include reference="BRe-Vf-oMG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="BRe-Vf-oMG" id="Dmc-Bf-5LP"/>
+                        <outlet property="tableView" destination="zDG-Fk-cu9" id="UbP-8c-BoZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CZd-z7-WKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="553.5" y="1805.25"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="j7R-aN-Cqb">
@@ -153,31 +211,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ugO-ee-yEF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2073" y="1794"/>
-        </scene>
-        <!--Search Table View Controller-->
-        <scene sceneID="KQO-is-vbI">
-            <objects>
-                <tableViewController title="Search" id="wcK-qg-zvb" userLabel="Search Table View Controller" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DF5-pP-NIi">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="XPu-yy-Ob8">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XPu-yy-Ob8" id="ji5-TG-p0v">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="wcK-qg-zvb" id="j8J-E9-amu"/>
-                            <outlet property="delegate" destination="wcK-qg-zvb" id="sbk-Dp-vb1"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VPs-Gr-3d4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="498" y="1794"/>
         </scene>
         <!--Box Table View Controller-->
         <scene sceneID="OKW-BM-hwg">
@@ -258,10 +291,10 @@
             </objects>
             <point key="canvasLocation" x="3597" y="1794"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav Controller-->
         <scene sceneID="yOB-3h-VfT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uzW-hL-6M7" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uzW-hL-6M7" userLabel="Nav Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jzr-FT-S5w">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
