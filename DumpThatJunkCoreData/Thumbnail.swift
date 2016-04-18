@@ -1,5 +1,5 @@
 //
-//  Item.swift
+//  Thumbnail.swift
 //  DumpThatJunkCoreData
 //
 //  Created by Mark CABIAO on 4/16/16.
@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class Item: NSManagedObject {
+class Thumbnail: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

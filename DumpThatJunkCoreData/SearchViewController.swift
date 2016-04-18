@@ -19,7 +19,6 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     var locationNames = [NSManagedObject]()
     
     var searchActive : Bool = false
-    //var data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
     var filtered:[String] = []
     
     override func viewDidLoad() {
@@ -37,7 +36,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     func fetchAllLocations(){
         let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest   = NSFetchRequest(entityName: "Location")
+        let fetchRequest   = NSFetchRequest(entityName: "Item")
         
         do{
             let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]

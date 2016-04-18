@@ -12,7 +12,7 @@ import CoreData
 class AddTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ButtonCellDelegate {
     
     var names = [String]()
-    var locationNames = [NSManagedObject]()
+    var itemNames = [NSManagedObject]()
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
@@ -28,7 +28,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
             
             if let results = fetchedResult{
-                locationNames = results
+                itemNames = results
             }
             else{
                 print("Could not fetch result")
@@ -41,9 +41,11 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         self.onTableViewCell.reloadData()
     }
     
-    var locationToUnitObject: NSObject? // object passed to Box view
+    //var locationToUnitObject: NSManagedObject? // object passed to Box view
     
     var segueToBoxName: String? // name passed to Box view
+    
+    var idOfLocation: Double? // location ID passed to Box view
     
     
     @IBOutlet weak var onTableViewCell: UITableView!
@@ -54,7 +56,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         let saveAction = UIAlertAction(title: "Save", style: .Default){
             (action : UIAlertAction!) -> Void in
             let textField = alert.textFields![0] as UITextField!
-            self.saveName(textField.text!)
+            self.saveLocation(textField.text!)
             self.onTableViewCell.reloadData()
             //self.onTableViewCell.bringSubviewToFront()
             //self.onTableViewCell.backgroundColor("transparent")
@@ -86,16 +88,16 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             print("Edit closure called")
             self.showEditNameAlert(atIndex: indexPath.row)
         }
-        
+        /*
         let pictureClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             print("Picture closure called")
         }
-        
+        */
         let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: deleteClosure)
         let editAction = UITableViewRowAction(style: .Normal, title: "Edit", handler: editClosure)
-        let pictureAction = UITableViewRowAction(style: .Normal, title: "Picture", handler: pictureClosure)
+        //let pictureAction = UITableViewRowAction(style: .Normal, title: "Picture", handler: pictureClosure)
         
-        return [deleteAction, editAction, pictureAction]
+        return [deleteAction, editAction]//, pictureAction]
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -107,7 +109,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
     {
         let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let objectToRemove = locationNames[atIndex] as NSManagedObject
+        let objectToRemove = itemNames[atIndex] as NSManagedObject
         
         managedContext.deleteObject(objectToRemove)
         
@@ -118,19 +120,26 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             print("There is some error while updating CoreData.")
         }
         
-        locationNames.removeAtIndex(atIndex)
+        itemNames.removeAtIndex(atIndex)
         
         self.onTableViewCell.reloadData()
     }
     
-    func saveName(name: String)
+    func saveLocation(location: String)
     {
         let appDelegate    = UIApplication.sharedApplication().delegate as? AppDelegate
         let managedContext = appDelegate!.managedObjectContext
         let entity         = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedContext)
-        let location       = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let itemLocation       = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        //let date = NSDate.init()
         
-        location.setValue(name, forKey: "name")
+        itemLocation.setValue(location, forKey: "name")
+        //itemLocation.setValue(date, forKey: "dateModified")
+        
+        // use date as unique id
+         let date : Double = NSDate().timeIntervalSince1970
+        itemLocation.setValue(date, forKey: "locationID")
+        
         
         do{
             try managedContext.save()
@@ -139,8 +148,9 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             print("There is some error.")
         }
         
-        //locationToUnitObject = location
-        locationNames.append(location)
+        idOfLocation = date
+        //locationToUnitObject = itemLocation
+        itemNames.append(itemLocation)
     }
     
     override func viewDidLoad() {
@@ -152,7 +162,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        title = "Location List"
+        title = "Locations"
         onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         //onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         
@@ -190,7 +200,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
      }
      */
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return locationNames.count
+        return itemNames.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
@@ -200,7 +210,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         
         theCell.accessoryType = .DisclosureIndicator
         
-        let room = locationNames[indexPath.row]
+        let room = itemNames[indexPath.row]
         theCell.textLabel!.text = room.valueForKey("name") as? String
         
         
@@ -236,7 +246,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         performSegueWithIdentifier("AddBoxSegue", sender: self)
     }
     
-    func editName(name : String, andIndex theIndex : Int)
+    func editLocation(name : String, andIndex theIndex : Int)
     {
         let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -257,8 +267,8 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
                     print("There is some error.")
                 }
                 
-                if locationNames .contains(personToUpdate){
-                    locationNames.replaceRange(theIndex...theIndex, with: [personToUpdate])
+                if itemNames .contains(personToUpdate){
+                    itemNames.replaceRange(theIndex...theIndex, with: [personToUpdate])
                     self.onTableViewCell.reloadData()
                 }
             }
@@ -271,8 +281,8 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
     
     func showEditNameAlert(atIndex theIndex : Int)
     {
-        let person     = locationNames[theIndex]
-        let nameToEdit = person.valueForKey("name") as? String
+        let person     = itemNames[theIndex]
+        let nameToEdit = person.valueForKey("location") as? String
         
         let alert = UIAlertController(title: "Update Location", message: "Edit a Location Name", preferredStyle: .Alert)
         
@@ -282,7 +292,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             let textField = alert.textFields![0] as UITextField!
             
             if nameToEdit != textField.text{
-                self.editName(textField.text!, andIndex: theIndex)
+                self.editLocation(textField.text!, andIndex: theIndex)
             }
         }
         
@@ -315,8 +325,9 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             //        return
             //}
             
-            boxVC?.locationObject = locationToUnitObject
+            //boxVC?.locationObject = locationToUnitObject
             
+            boxVC?.idOfLocation = idOfLocation
             boxVC?.locationName = segueToBoxName
             print(segueToBoxName)
             print(boxVC?.locationName)

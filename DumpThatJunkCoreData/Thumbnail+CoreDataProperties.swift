@@ -1,5 +1,5 @@
 //
-//  Location+CoreDataProperties.swift
+//  Thumbnail+CoreDataProperties.swift
 //  DumpThatJunkCoreData
 //
 //  Created by Mark CABIAO on 4/17/16.
@@ -12,10 +12,10 @@
 import Foundation
 import CoreData
 
-extension Location {
+extension Thumbnail {
 
-    @NSManaged var name: String?
-    @NSManaged var locationID: NSNumber?
-    @NSManaged var units: NSSet?
+    @NSManaged var id: NSNumber?
+    @NSManaged var imageData: NSData?
+    @NSManaged var fullRes: Item?
 
 }

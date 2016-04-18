@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  DumpThatJunkCoreData
 //
-//  Created by Mark CABIAO on 4/10/16.
+//  Created by Mark CABIAO on 4/17/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,6 +17,8 @@ extension Item {
     @NSManaged var name: String?
     @NSManaged var picture: NSData?
     @NSManaged var qty: NSNumber?
+    @NSManaged var itemID: NSNumber?
     @NSManaged var unit: Unit?
+    @NSManaged var thumbnail: Thumbnail?
 
 }

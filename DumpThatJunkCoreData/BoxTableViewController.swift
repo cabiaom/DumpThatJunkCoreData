@@ -15,7 +15,9 @@ class BoxTableViewController: UITableViewController {
     var boxNames = [NSManagedObject]()
     
     // location object passed in from Add Table View Controller
-    var locationObject: NSObject?
+    var locationObject: NSManagedObject?
+    
+    var idOfLocation: Double?
     
     // name of location from Add Table View Controller
     var locationName: String?
@@ -43,8 +45,7 @@ class BoxTableViewController: UITableViewController {
             (action : UIAlertAction!) -> Void in
         }
         
-        alert.addTextFieldWithConfigurationHandler
-            {
+        alert.addTextFieldWithConfigurationHandler{
                 (textField : UITextField!) -> Void in
         }
         
@@ -74,19 +75,37 @@ class BoxTableViewController: UITableViewController {
         }
         catch
         {
-            print("There is some error.")
+            print("There is some error saving a unit.")
         }
         
         // create relation of Unit to Location
-        
-        unit.setValue(NSSet(object: locationObject!), forKey: "location")
+        /*
+        let fetchRequest = NSFetchRequest(entityName: "Location")
+        let predicate = NSPredicate(format: "%K MATCHES %@", "locationID", idOfLocation!)
+        fetchRequest.predicate = predicate
         
         do {
-            try unit.managedObjectContext?.save()
+            let result = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            
+            if let theResult = result{
+                let locationToRelate = theResult[0] as NSManagedObject
+                locationToRelate.setValue(NSSet(object: unit), forKey: "units")
+            }
+            
+            do{
+                try managedContext.save()
+            }
+            catch{
+                print("There is an error relating a unit to a location.")
+            }
+            
         } catch {
-            let saveError = error as NSError
-            print(saveError)
+            let fetchError = error as NSError
+            print(fetchError)
         }
+        */
+        
+        
         
         //unitToItemObject = unit
         boxNames.append(unit)
@@ -110,12 +129,40 @@ class BoxTableViewController: UITableViewController {
         //}
         
         
-        //print("boxtableview: ")
-        title = locationName
         
-        // fetch all boxes in location and populate arrayBox
+        
+        //print("boxtableview: ")
+        // title
+        print("\(idOfLocation)")
     }
-
+    
+    override func viewWillAppear(animated: Bool){
+        super.viewWillAppear(animated)
+        fetchAllBoxes()
+    }
+    
+    func fetchAllBoxes(){
+        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest   = NSFetchRequest(entityName: "Unit")
+        
+        do{
+            let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            
+            if let results = fetchedResult{
+                boxNames = results
+            }
+            else{
+                print("Could not fetch result")
+            }
+        }
+        catch{
+            print("There is an error saving the Unit name.")
+        }
+        
+        self.onTableViewBoxCell.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

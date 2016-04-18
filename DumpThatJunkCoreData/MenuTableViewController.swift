@@ -9,6 +9,12 @@
 import UIKit
 
 class MenuTableViewController: UITableViewController {
+    
+    var menuNames = ["Browse","Search","Notifications","About"]
+    var menuPictures = ["commercial-delivery-symbol-of-a-list-on-clipboard-on-a-box-package",
+                        "search-delivery-service-tool",
+                        "delivery-box-and-timer",
+                        "delivery-package-opened"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,30 +40,34 @@ class MenuTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return menuNames.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // runs once for each row in nuberOfRowsInSection
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = "Hello Friend"
+        cell.textLabel?.text = menuNames[indexPath.row]
         
-        cell.imageView?.image = UIImage(named: "delivery-packaging-box")
+        cell.imageView?.image = UIImage(named: menuPictures[indexPath.row])
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0{
-            self.performSegueWithIdentifier("AddLocationSegue", sender: self)
-        }
-        if indexPath.row == 1{
             self.performSegueWithIdentifier("AddSegue", sender: self)
         }
-        if indexPath.row == 2{
+        if indexPath.row == 1{
             self.performSegueWithIdentifier("SearchSegue", sender: self)
         }
+        if indexPath.row == 2{
+            self.performSegueWithIdentifier("NotificationSegue", sender: self)
+        }
+        if indexPath.row == 3{
+            self.performSegueWithIdentifier("AddLocationSegue", sender: self)
+        }
+        
     }
 
 
