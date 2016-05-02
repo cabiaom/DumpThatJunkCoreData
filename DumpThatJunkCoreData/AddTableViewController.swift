@@ -9,7 +9,21 @@
 import UIKit
 import CoreData
 
-class AddTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ButtonCellDelegate {
+class AddTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate{
+    
+    let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+    var context: NSManagedObjectContext!
+    
+    func junkFetchRequest() -> NSFetchRequest {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Location")
+        return fetchRequest
+    }
+    
+    func controllerDidChangeContent(controller:
+        NSFetchedResultsController) {
+        tableView.reloadData()
+    }
     
     var names = [String]()
     var itemNames = [NSManagedObject]()
@@ -20,9 +34,14 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
     }
     
     func fetchAllLocations(){
-        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
+        
+        //let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = delegate
+        let managedContext = appDelegate!.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Location")
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         do{
             let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
@@ -38,14 +57,16 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             print("There is some error.")
         }
         
+        
         self.onTableViewCell.reloadData()
     }
+ 
     
-    //var locationToUnitObject: NSManagedObject? // object passed to Box view
+    var locationToUnitObject: NSManagedObject? // object passed to Box view
     
     var segueToBoxName: String? // name passed to Box view
     
-    var idOfLocation: Double? // location ID passed to Box view
+    var idOfLocation: NSNumber? // location ID passed to Box view
     
     
     @IBOutlet weak var onTableViewCell: UITableView!
@@ -77,6 +98,8 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         
     }
     
+    
+    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         let deleteClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
@@ -107,10 +130,11 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
     
     func deleteName(atIndex : Int)
     {
+        
         let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let objectToRemove = itemNames[atIndex] as NSManagedObject
-        
+ 
         managedContext.deleteObject(objectToRemove)
         
         do{
@@ -123,14 +147,18 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         itemNames.removeAtIndex(atIndex)
         
         self.onTableViewCell.reloadData()
+        
     }
     
     func saveLocation(location: String)
     {
+        
         let appDelegate    = UIApplication.sharedApplication().delegate as? AppDelegate
         let managedContext = appDelegate!.managedObjectContext
         let entity         = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedContext)
         let itemLocation       = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+ 
+ 
         //let date = NSDate.init()
         
         itemLocation.setValue(location, forKey: "name")
@@ -148,7 +176,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             print("There is some error.")
         }
         
-        idOfLocation = date
+        //idOfLocation = date
         //locationToUnitObject = itemLocation
         itemNames.append(itemLocation)
     }
@@ -162,11 +190,15 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        title = "Locations"
+        //title = "Locations"
         onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         //onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
+        configureView()
         
-        
+    }
+    
+    func configureView(){
+        title = "Locations"
     }
     
     override func didReceiveMemoryWarning() {
@@ -221,7 +253,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         
         return theCell
     }
-    
+    /*
     func cellTapped(cell: ButtonCell) {
         self.showAlertForRow(tableView.indexPathForCell(cell)!.row)
     }
@@ -240,17 +272,44 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
             animated: true,
             completion: nil)
     }
-    
+    */
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest   = NSFetchRequest(entityName: "Location")
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do
+        {
+            let fetchResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            
+            if let theResult = fetchResult{
+                locationToUnitObject = theResult[indexPath.row] as NSManagedObject
+                idOfLocation = locationToUnitObject?.valueForKey("locationID") as? NSNumber
+                segueToBoxName = locationToUnitObject?.valueForKey("name") as? String
+                print("did select: \(idOfLocation)")
+            }
+        }
+        catch
+        {
+            print("Some error in fetching queries.")
+        }
+        
         performSegueWithIdentifier("AddBoxSegue", sender: self)
     }
     
     func editLocation(name : String, andIndex theIndex : Int)
     {
+        
         let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Location")
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         do
         {
@@ -277,12 +336,13 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         {
             print("Some error in fetching queries.")
         }
+        
     }
     
     func showEditNameAlert(atIndex theIndex : Int)
     {
         let person     = itemNames[theIndex]
-        let nameToEdit = person.valueForKey("location") as? String
+        let nameToEdit = person.valueForKey("name") as? String
         
         let alert = UIAlertController(title: "Update Location", message: "Edit a Location Name", preferredStyle: .Alert)
         
@@ -313,20 +373,10 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddBoxSegue"{
+            
             let boxVC = segue.destinationViewController as? BoxTableViewController
-            
-            // get the cell that was tapped - sender
-            // get the index path for that cell
-            // use the index path to get the locationName from the array
-            
-            //guard let cell = sender as? UITableViewCell,
-            //    let indexPath = tableView.indexPathForCell(cell)
-            //    else{
-            //        return
-            //}
-            
-            //boxVC?.locationObject = locationToUnitObject
-            
+            boxVC?.locationObject = locationToUnitObject
+            boxVC?.applicationDelegate = delegate
             boxVC?.idOfLocation = idOfLocation
             boxVC?.locationName = segueToBoxName
             print(segueToBoxName)

@@ -10,11 +10,13 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
     
-    var menuNames = ["Browse","Search","Notifications","About"]
-    var menuPictures = ["commercial-delivery-symbol-of-a-list-on-clipboard-on-a-box-package",
-                        "search-delivery-service-tool",
-                        "delivery-box-and-timer",
-                        "delivery-package-opened"]
+    //var coreDataStack: CoreDataStack!
+    
+    var menuNames = ["Inventory","Search","Notifications","About"]
+    var menuPictures = ["contract",
+                        "magnifying-glass",
+                        "ring",
+                        "notepad"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,7 @@ class MenuTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        title = "Main Menu"
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,14 +65,20 @@ class MenuTableViewController: UITableViewController {
             self.performSegueWithIdentifier("SearchSegue", sender: self)
         }
         if indexPath.row == 2{
+            
+            // ask for permission to get local notifications
+            let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+            
             self.performSegueWithIdentifier("NotificationSegue", sender: self)
         }
         if indexPath.row == 3{
-            self.performSegueWithIdentifier("AddLocationSegue", sender: self)
+            self.performSegueWithIdentifier("AboutSegue", sender: self)
         }
         
     }
-
+    
+   
 
 
 }

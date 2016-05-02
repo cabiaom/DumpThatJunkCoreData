@@ -21,6 +21,149 @@ class ItemTableViewController: UITableViewController {
     
     // name of box (unit) from Item View Controller
     var unitName: String?
+    
+    var idOfBoxUnit: NSNumber?
+    
+    var applicationDelegate: AppDelegate?
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            print("Delete closure called")
+            self.deleteName(indexPath.row)
+        }
+        
+        let editClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            print("Edit closure called")
+            self.showEditNameAlert(atIndex: indexPath.row)
+        }
+        /*
+         let pictureClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+         print("Picture closure called")
+         }
+         */
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: deleteClosure)
+        let editAction = UITableViewRowAction(style: .Normal, title: "Edit", handler: editClosure)
+        //let pictureAction = UITableViewRowAction(style: .Normal, title: "Picture", handler: pictureClosure)
+        
+        return [deleteAction, editAction]//, pictureAction]
+    }
+    
+    func editUnit(name : String, andIndex theIndex : Int)
+    {
+        
+        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest   = NSFetchRequest(entityName: "Item")
+        
+        let predicate = NSPredicate(format: "unit.unitID == %@", idOfBoxUnit! )
+        fetchRequest.predicate = predicate
+        
+        // set time for unit because unit was edited
+        let todaysDate = NSDate()
+        unitObject?.setValue(todaysDate, forKey: "dateModified")
+        scheduleLocalnotification()
+        print("date updated EDIT: \(todaysDate)")
+        
+        do
+        {
+            let fetchResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            
+            if let theResult = fetchResult{
+                
+                let personToUpdate = theResult[theIndex] as NSManagedObject
+                
+                let oldName = personToUpdate.valueForKey("name") as? String
+                
+                print ("count: \(itemNames.count)")
+                
+                print("Old name: \(oldName)")
+                
+                personToUpdate.setValue(name, forKey:"name")
+                
+                print("New name: \(name)")
+                
+                do{
+                    try managedContext.save()
+                }
+                catch{
+                    print("There is some error.")
+                }
+                
+                if itemNames.contains(personToUpdate){
+                    itemNames.replaceRange(theIndex...theIndex, with: [personToUpdate])
+                    self.onTableViewItemCell.reloadData()
+                }
+            }
+        }
+        catch
+        {
+            print("Some error in fetching queries.")
+        }
+        
+    }
+    
+    func showEditNameAlert(atIndex theIndex : Int)
+    {
+        let person     = itemNames[theIndex]
+        let nameToEdit = person.valueForKey("name") as? String
+        
+        let alert = UIAlertController(title: "Update Item", message: "Edit an Item Name", preferredStyle: .Alert)
+        
+        let updateAction = UIAlertAction(title: "Update", style: .Default){
+            (action : UIAlertAction!) -> Void in
+            
+            let textField = alert.textFields![0] as UITextField!
+            
+            if nameToEdit != textField.text{
+                self.editUnit(textField.text!, andIndex: theIndex)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default){
+            (action : UIAlertAction) -> Void in
+        }
+        
+        alert.addTextFieldWithConfigurationHandler{
+            (textField : UITextField!) -> Void in
+            textField.text = nameToEdit
+        }
+        
+        alert.addAction(updateAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func deleteName(atIndex : Int)
+    {
+        
+        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let objectToRemove = itemNames[atIndex] as NSManagedObject
+        
+        managedContext.deleteObject(objectToRemove)
+        
+        // set time for unit because unit was edited
+        let todaysDate = NSDate()
+        unitObject?.setValue(todaysDate, forKey: "dateModified")
+        scheduleLocalnotification()
+        print("date updated DELETE: \(todaysDate)")
+        
+        
+        do{
+            try managedContext.save()
+        }
+        catch{
+            print("There is some error while updating CoreData.")
+        }
+        
+        itemNames.removeAtIndex(atIndex)
+        
+        self.onTableViewItemCell.reloadData()
+        
+    }
+
 
     @IBAction func onButtonAddItem(sender: AnyObject) {
         let alert = UIAlertController(title: "New Item", message: "Add a new item", preferredStyle: .Alert)
@@ -56,15 +199,19 @@ class ItemTableViewController: UITableViewController {
         let item       = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         
+        // use date as unique id
+        let date : Double = NSDate().timeIntervalSince1970
+        item.setValue(date, forKey: "itemID")
+        
+        // set relationsip to unit
         item.setValue(unitObject, forKey: "unit")
         
-        do {
-            try item.managedObjectContext?.save()
-        } catch {
-            let saveError = error as NSError
-            print(saveError)
-        }
-        
+        // set time for unit because unit was edited
+        let todaysDate = NSDate()
+        unitObject?.setValue(todaysDate, forKey: "dateModified")
+        scheduleLocalnotification()
+        print("date updated SAVE: \(todaysDate)")
+
         item.setValue(name, forKey: "name")
         
         do
@@ -77,6 +224,7 @@ class ItemTableViewController: UITableViewController {
         }
         
         itemNames.append(item)
+        
     }
 
     
@@ -90,7 +238,67 @@ class ItemTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         title = unitName
     }
-
+    
+    override func viewWillAppear(animated: Bool){
+        super.viewWillAppear(animated)
+        fetchAllItems()
+    }
+    
+    func fetchAllItems(){
+        
+        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        //let appDelegate = applicationDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest   = NSFetchRequest(entityName: "Item")
+        //let doubleid = idOfLocation! as Double
+        //print ("double id: \(doubleid)")
+        
+        print("idOfLocation \(idOfBoxUnit)")
+        
+        // fetch only what is for this particular id
+        let locationIdPredicate = NSPredicate(format: "%K == %@", "unit.unitID" , idOfBoxUnit!)
+        fetchRequest.predicate = locationIdPredicate
+        
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do{
+            let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            
+            if let results = fetchedResult{
+                itemNames = results
+                print("All the boxes: \(itemNames)") // fault
+                for box in results{
+                    
+                    print (" _")
+                    let name = box.valueForKey( "name")
+                    print("Item name: \(name)")
+                    
+                    let idlocation = box.valueForKey("unit") as? BoxUnit
+                    let idloc = idlocation?.unitID
+                    print ("idbox: \(idloc)")
+                    
+                    /*
+                     if (idloc == idOfLocation){
+                     boxNames.append(box)
+                     }
+                     */
+                }
+                
+            }
+            else{
+                print("Could not fetch result")
+            }
+        }
+        catch{
+            print("There is an error fetching all the boxes.")
+        }
+        
+        self.onTableViewItemCell.reloadData()
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -103,10 +311,10 @@ class ItemTableViewController: UITableViewController {
         return 1
     }
 
-    //override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-    //    return 0
-    //}
+        return itemNames.count
+    }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -114,13 +322,66 @@ class ItemTableViewController: UITableViewController {
 
         tableView.separatorInset = UIEdgeInsetsZero
         
+        //cell.accessoryType = .DisclosureIndicator
+        
         let room = itemNames[indexPath.row]
         cell.textLabel!.text = room.valueForKey("name") as? String
+        let cellname = room.valueForKey("name") as? String
+        print("cell draw: \(cellname)")
 
         return cell
     }
     
-
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        
+        if parent == nil{
+            print("Back Button pressed.")
+            itemNames.removeAll()
+        }
+        
+    }
+    
+    func deleteOldNotification(){
+        let app:UIApplication = UIApplication.sharedApplication()
+        for oneEvent in app.scheduledLocalNotifications! {
+            let notification = oneEvent as UILocalNotification
+            let userInfoCurrent = notification.userInfo! as! [String:NSNumber]
+            let uid = userInfoCurrent["w00t"]! as NSNumber
+            if uid == idOfBoxUnit {
+                //Cancelling local notification
+                app.cancelLocalNotification(notification)
+                break;
+            }
+        }
+    }
+    
+    func scheduleLocalnotification() {
+        
+        deleteOldNotification()
+        
+        guard let settings = UIApplication.sharedApplication().currentUserNotificationSettings() else { return }
+        
+        if settings.types == .None {
+            let ac = UIAlertController(title: "Can't schedule notification", message: "Please turn on notifications for this app under the notifications menu.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+            return
+        }
+        
+        let notification = UILocalNotification()
+        notification.fireDate = NSDate(timeIntervalSinceNow: 30)
+        let message: String
+        if let unitNameText = unitName {
+            message = "You have not used any items in the \(unitNameText) box for 6 months!"
+            notification.alertBody = message
+        }
+        notification.alertAction = "be awesome and dontate the items now!"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["w00t": idOfBoxUnit!]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

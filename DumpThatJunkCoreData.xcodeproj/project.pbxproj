@@ -13,17 +13,18 @@
 		CF8854391C85439E00373A68 /* DumpThatJunkCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF8854371C85439E00373A68 /* DumpThatJunkCoreData.xcdatamodeld */; };
 		CF88543B1C85439E00373A68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF88543A1C85439E00373A68 /* Assets.xcassets */; };
 		CF88543E1C85439E00373A68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF88543C1C85439E00373A68 /* LaunchScreen.storyboard */; };
+		CFAA06F21CC57EBA00F18B66 /* Thumbnail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06EA1CC57EBA00F18B66 /* Thumbnail+CoreDataProperties.swift */; };
+		CFAA06F31CC57EBA00F18B66 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06EB1CC57EBA00F18B66 /* Thumbnail.swift */; };
+		CFAA06F61CC57EBA00F18B66 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06EE1CC57EBA00F18B66 /* Location+CoreDataProperties.swift */; };
+		CFAA06F71CC57EBA00F18B66 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06EF1CC57EBA00F18B66 /* Location.swift */; };
+		CFAA06F81CC57EBA00F18B66 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06F01CC57EBA00F18B66 /* Item+CoreDataProperties.swift */; };
+		CFAA06F91CC57EBA00F18B66 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06F11CC57EBA00F18B66 /* Item.swift */; };
+		CFAA06FC1CC57FDF00F18B66 /* BoxUnit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06FA1CC57FDF00F18B66 /* BoxUnit+CoreDataProperties.swift */; };
+		CFAA06FD1CC57FDF00F18B66 /* BoxUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA06FB1CC57FDF00F18B66 /* BoxUnit.swift */; };
 		CFB321461CB1E74C00143DD0 /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB321451CB1E74C00143DD0 /* AddTableViewCell.swift */; };
 		CFB3214E1CB227A200143DD0 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB3214D1CB227A200143DD0 /* ButtonCell.swift */; };
-		CFDBA1761CC3017C005B6308 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA1721CC3017C005B6308 /* Item+CoreDataProperties.swift */; };
-		CFDBA1771CC3017C005B6308 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA1731CC3017C005B6308 /* Item.swift */; };
-		CFDBA1781CC3017C005B6308 /* Thumbnail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA1741CC3017C005B6308 /* Thumbnail+CoreDataProperties.swift */; };
-		CFDBA1791CC3017C005B6308 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA1751CC3017C005B6308 /* Thumbnail.swift */; };
-		CFDBA18B1CC42A49005B6308 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA18A1CC42A49005B6308 /* NotificationViewController.swift */; };
-		CFDBA1911CC497CD005B6308 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA18D1CC497CD005B6308 /* Location+CoreDataProperties.swift */; };
-		CFDBA1921CC497CD005B6308 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA18E1CC497CD005B6308 /* Location.swift */; };
-		CFDBA1931CC497CD005B6308 /* Unit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA18F1CC497CD005B6308 /* Unit+CoreDataProperties.swift */; };
-		CFDBA1941CC497CD005B6308 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA1901CC497CD005B6308 /* Unit.swift */; };
+		CFE9630B1CD725830058FEB5 /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE9630A1CD725830058FEB5 /* NotificationsTableViewController.swift */; };
+		CFE9630F1CD737520058FEB5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE9630E1CD737520058FEB5 /* AboutViewController.swift */; };
 		CFF1C7AF1C8BEAB9008407C5 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1C7AE1C8BEAB9008407C5 /* MenuTableViewController.swift */; };
 		CFF1C7DF1C93A17D008407C5 /* AddTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1C7DE1C93A17D008407C5 /* AddTableViewController.swift */; };
 		CFF1C7E11C97D2BC008407C5 /* BoxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1C7E01C97D2BC008407C5 /* BoxTableViewController.swift */; };
@@ -40,19 +41,20 @@
 		CF88543A1C85439E00373A68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF88543D1C85439E00373A68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF88543F1C85439E00373A68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFAA06EA1CC57EBA00F18B66 /* Thumbnail+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Thumbnail+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFAA06EB1CC57EBA00F18B66 /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
+		CFAA06EE1CC57EBA00F18B66 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFAA06EF1CC57EBA00F18B66 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		CFAA06F01CC57EBA00F18B66 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFAA06F11CC57EBA00F18B66 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		CFAA06FA1CC57FDF00F18B66 /* BoxUnit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BoxUnit+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CFAA06FB1CC57FDF00F18B66 /* BoxUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxUnit.swift; sourceTree = "<group>"; };
 		CFB321451CB1E74C00143DD0 /* AddTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		CFB3214D1CB227A200143DD0 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		CFDBA1531CC2DEED005B6308 /* DumpThatJunkCoreData 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DumpThatJunkCoreData 3.xcdatamodel"; sourceTree = "<group>"; };
-		CFDBA1721CC3017C005B6308 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFDBA1731CC3017C005B6308 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		CFDBA1741CC3017C005B6308 /* Thumbnail+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Thumbnail+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFDBA1751CC3017C005B6308 /* Thumbnail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
-		CFDBA18A1CC42A49005B6308 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		CFDBA18C1CC49621005B6308 /* DumpThatJunkCoreData 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DumpThatJunkCoreData 4.xcdatamodel"; sourceTree = "<group>"; };
-		CFDBA18D1CC497CD005B6308 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFDBA18E1CC497CD005B6308 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		CFDBA18F1CC497CD005B6308 /* Unit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Unit+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CFDBA1901CC497CD005B6308 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		CFE9630A1CD725830058FEB5 /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
+		CFE9630E1CD737520058FEB5 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		CFF1C7AE1C8BEAB9008407C5 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		CFF1C7DE1C93A17D008407C5 /* AddTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTableViewController.swift; sourceTree = "<group>"; };
 		CFF1C7E01C97D2BC008407C5 /* BoxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxTableViewController.swift; sourceTree = "<group>"; };
@@ -89,14 +91,14 @@
 		CF88542F1C85439E00373A68 /* DumpThatJunkCoreData */ = {
 			isa = PBXGroup;
 			children = (
-				CFDBA18D1CC497CD005B6308 /* Location+CoreDataProperties.swift */,
-				CFDBA18E1CC497CD005B6308 /* Location.swift */,
-				CFDBA18F1CC497CD005B6308 /* Unit+CoreDataProperties.swift */,
-				CFDBA1901CC497CD005B6308 /* Unit.swift */,
-				CFDBA1721CC3017C005B6308 /* Item+CoreDataProperties.swift */,
-				CFDBA1731CC3017C005B6308 /* Item.swift */,
-				CFDBA1741CC3017C005B6308 /* Thumbnail+CoreDataProperties.swift */,
-				CFDBA1751CC3017C005B6308 /* Thumbnail.swift */,
+				CFAA06FA1CC57FDF00F18B66 /* BoxUnit+CoreDataProperties.swift */,
+				CFAA06FB1CC57FDF00F18B66 /* BoxUnit.swift */,
+				CFAA06EA1CC57EBA00F18B66 /* Thumbnail+CoreDataProperties.swift */,
+				CFAA06EB1CC57EBA00F18B66 /* Thumbnail.swift */,
+				CFAA06EE1CC57EBA00F18B66 /* Location+CoreDataProperties.swift */,
+				CFAA06EF1CC57EBA00F18B66 /* Location.swift */,
+				CFAA06F01CC57EBA00F18B66 /* Item+CoreDataProperties.swift */,
+				CFAA06F11CC57EBA00F18B66 /* Item.swift */,
 				CF8854301C85439E00373A68 /* AppDelegate.swift */,
 				CF8854341C85439E00373A68 /* Main.storyboard */,
 				CF88543A1C85439E00373A68 /* Assets.xcassets */,
@@ -110,7 +112,8 @@
 				CFB321451CB1E74C00143DD0 /* AddTableViewCell.swift */,
 				CFB3214D1CB227A200143DD0 /* ButtonCell.swift */,
 				CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */,
-				CFDBA18A1CC42A49005B6308 /* NotificationViewController.swift */,
+				CFE9630A1CD725830058FEB5 /* NotificationsTableViewController.swift */,
+				CFE9630E1CD737520058FEB5 /* AboutViewController.swift */,
 			);
 			path = DumpThatJunkCoreData;
 			sourceTree = "<group>";
@@ -187,23 +190,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFB321461CB1E74C00143DD0 /* AddTableViewCell.swift in Sources */,
+				CFAA06FD1CC57FDF00F18B66 /* BoxUnit.swift in Sources */,
+				CFAA06F21CC57EBA00F18B66 /* Thumbnail+CoreDataProperties.swift in Sources */,
+				CFAA06FC1CC57FDF00F18B66 /* BoxUnit+CoreDataProperties.swift in Sources */,
+				CFAA06F71CC57EBA00F18B66 /* Location.swift in Sources */,
+				CFAA06F31CC57EBA00F18B66 /* Thumbnail.swift in Sources */,
 				CF32FF2B1CC031CB00F34AE8 /* SearchViewController.swift in Sources */,
-				CFDBA1921CC497CD005B6308 /* Location.swift in Sources */,
-				CFDBA1941CC497CD005B6308 /* Unit.swift in Sources */,
 				CFF1C7AF1C8BEAB9008407C5 /* MenuTableViewController.swift in Sources */,
+				CFE9630B1CD725830058FEB5 /* NotificationsTableViewController.swift in Sources */,
+				CFE9630F1CD737520058FEB5 /* AboutViewController.swift in Sources */,
 				CF8854391C85439E00373A68 /* DumpThatJunkCoreData.xcdatamodeld in Sources */,
-				CFDBA1781CC3017C005B6308 /* Thumbnail+CoreDataProperties.swift in Sources */,
-				CFDBA1931CC497CD005B6308 /* Unit+CoreDataProperties.swift in Sources */,
-				CFDBA18B1CC42A49005B6308 /* NotificationViewController.swift in Sources */,
 				CFB3214E1CB227A200143DD0 /* ButtonCell.swift in Sources */,
+				CFAA06F91CC57EBA00F18B66 /* Item.swift in Sources */,
 				CFF1C7E31C9DDC09008407C5 /* ItemTableViewController.swift in Sources */,
-				CFDBA1761CC3017C005B6308 /* Item+CoreDataProperties.swift in Sources */,
-				CFDBA1791CC3017C005B6308 /* Thumbnail.swift in Sources */,
-				CFDBA1771CC3017C005B6308 /* Item.swift in Sources */,
 				CFF1C7E11C97D2BC008407C5 /* BoxTableViewController.swift in Sources */,
 				CF8854311C85439E00373A68 /* AppDelegate.swift in Sources */,
 				CFF1C7DF1C93A17D008407C5 /* AddTableViewController.swift in Sources */,
-				CFDBA1911CC497CD005B6308 /* Location+CoreDataProperties.swift in Sources */,
+				CFAA06F81CC57EBA00F18B66 /* Item+CoreDataProperties.swift in Sources */,
+				CFAA06F61CC57EBA00F18B66 /* Location+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

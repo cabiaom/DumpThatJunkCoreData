@@ -13,20 +13,24 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
+    //lazy var coreDataStack = CoreDataStack()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         /*
-        let splitViewController = window!.rootViewController as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
+        func application(application: UIApplication,
+                         didFinishLaunchingWithOptions launchOptions:
+            [NSObject : AnyObject]?) -> Bool {
+            
+            let navigationController = window!.rootViewController
+                as! UINavigationController
+            let menuViewController = navigationController.topViewController as! MenuTableViewController
+            menuViewController.coreDataStack = coreDataStack
+            
+            return true
+        }
+        */
         
-        UISearchBar.appearance().barTintColor = UIColor.candyGreen()
-        UISearchBar.appearance().tintColor = UIColor.whiteColor()
-        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.candyGreen()
-         
-         */
         return true
     }
     

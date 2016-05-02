@@ -2,7 +2,7 @@
 //  Thumbnail+CoreDataProperties.swift
 //  DumpThatJunkCoreData
 //
-//  Created by Mark CABIAO on 4/17/16.
+//  Created by Mark CABIAO on 4/18/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

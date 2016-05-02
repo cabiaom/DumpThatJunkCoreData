@@ -1,14 +1,14 @@
 //
-//  NotificationViewController.swift
+//  AboutViewController.swift
 //  DumpThatJunkCoreData
 //
-//  Created by Mark CABIAO on 4/17/16.
+//  Created by Mark CABIAO on 5/2/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
 //
 
 import UIKit
 
-class NotificationViewController: UIViewController {
+class AboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +18,10 @@ class NotificationViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
-        self.title = "Notification Settings"
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    
+
     /*
     // MARK: - Navigation
 

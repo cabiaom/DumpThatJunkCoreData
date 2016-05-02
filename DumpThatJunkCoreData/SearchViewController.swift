@@ -14,8 +14,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    
     var names = [String]()
+    var objects = [NSManagedObject]()
     var locationNames = [NSManagedObject]()
     
     var searchActive : Bool = false
@@ -38,6 +38,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Item")
         
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
         do{
             let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
             
@@ -45,6 +48,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
                 locationNames = results
                 
                 for object in locationNames{
+                    objects.append(object)
                     names.append((object.valueForKey("name") as? String)!)
                 }
                 
@@ -90,6 +94,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             searchActive = true;
         }
         self.tableView.reloadData()
+ 
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,11 +115,56 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
-        cell.accessoryType = .DisclosureIndicator
+        
+        //let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
+        
+        //if cell == nil{
+            let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+        //}
+        
+        
+        let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest   = NSFetchRequest(entityName: "Item")
+        
+       //cell.accessoryType = .DisclosureIndicator
         
         if(searchActive){
             cell.textLabel?.text = filtered[indexPath.row]
+            let key = filtered[indexPath.row]
+            let predicate = NSPredicate(format: "%K == %@", "name", key)
+            fetchRequest.predicate = predicate
+            
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            do
+            {
+                let fetchResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+                
+                for theResult in fetchResult!{
+                    let name = theResult.valueForKey("name") as? String
+                    print("Name found: \(name)")
+                    let box = theResult.valueForKey("unit") as? BoxUnit
+                    let boxName = box?.name
+                    
+                    let location = (box?.location)! as Location
+                    let locationName = location.name
+                    
+                    
+                    
+                    print("\(boxName)")
+                    cell.detailTextLabel?.numberOfLines = 0
+                    cell.detailTextLabel?.text = "LOCATION:  "+locationName! + ",  BOX: " + boxName!
+                    
+                }
+            }
+            catch
+            {
+                print("Some error in fetching queries.")
+            }
+            
+            
         } else {
             cell.textLabel?.text = names[indexPath.row]
             /*
@@ -127,6 +177,22 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell;
     }
-
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if(searchActive != true){
+            let selectedName = names[indexPath.row]
+            filtered.append(selectedName)
+            
+            if(filtered.count == 0){
+                searchActive = false;
+            } else {
+                searchActive = true;
+            }
+ 
+            self.tableView.reloadData()
+        } //else {
+        //    cell.textLabel?.text = names[indexPath.row]
+    }
 
 }
