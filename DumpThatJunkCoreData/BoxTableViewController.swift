@@ -236,6 +236,8 @@ class BoxTableViewController: UITableViewController {
         
         title = locationName
         
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 1.741, green: 0.804, blue: 0.663, alpha: 1)
+        
         print("Enter Box view with ID: \(idOfLocation)")
     }
     
@@ -322,6 +324,8 @@ class BoxTableViewController: UITableViewController {
         tableView.separatorInset = UIEdgeInsetsZero
         
         cell.accessoryType = .DisclosureIndicator
+        
+        cell.backgroundColor = UIColor.clearColor()
         
         // box name
         let room = boxNames[indexPath.row]

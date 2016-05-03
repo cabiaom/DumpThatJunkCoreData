@@ -117,9 +117,9 @@ class ExpiredTableViewController: UITableViewController {
             let fetchedResult = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
             
             if let results = fetchedResult{
-                boxNames = results
+                //boxNames = results
                 print("All the boxes: \(boxNames)") // fault
-                //for box in results{
+                for box in results{
                     
                     //print (" _")
                     //let name = box.valueForKey( "name")
@@ -129,12 +129,13 @@ class ExpiredTableViewController: UITableViewController {
                     //let idloc = idlocation?.locationID
                     //print ("idlocation: \(idloc)")
                     
-                    /*
-                     if (idloc == idOfLocation){
+                    let dateModified = box.valueForKey("dateModified") as? NSDate
+                    
+                     if (calculatedDate?.timeIntervalSinceReferenceDate > dateModified?.timeIntervalSinceReferenceDate){
                      boxNames.append(box)
                      }
-                     */
-                //}
+                    
+                }
                 
             }
             else{
@@ -158,7 +159,13 @@ class ExpiredTableViewController: UITableViewController {
         
         // box name
         let room = boxNames[indexPath.row]
-        cell.textLabel!.text = room.valueForKey("name") as? String
+        let name = room.valueForKey("name") as? String
+        let dateNS = room.valueForKey("dateModified") as? NSDate
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let dateString = dateFormatter.stringFromDate(dateNS!)
+        cell.textLabel!.text = name! 
+        cell.detailTextLabel?.text = "EXPIRED: "+dateString
         
         return cell
     }

@@ -191,6 +191,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         //title = "Locations"
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.973, green: 0.945, blue: 0.827, alpha: 1)
         onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         //onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         configureView()
@@ -245,6 +246,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         let room = itemNames[indexPath.row]
         theCell.textLabel!.text = room.valueForKey("name") as? String
         
+        theCell.backgroundColor = UIColor.clearColor()
         
         //theCell.rowLabel.text = "\(indexPath.row)"
         //if theCell.buttonDelegate == nil {

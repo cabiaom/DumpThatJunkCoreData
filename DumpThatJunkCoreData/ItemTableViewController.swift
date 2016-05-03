@@ -236,6 +236,9 @@ class ItemTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.498, green: 0.706, blue: 0.596, alpha: 1)
+        
         title = unitName
     }
     
@@ -323,7 +326,7 @@ class ItemTableViewController: UITableViewController {
         tableView.separatorInset = UIEdgeInsetsZero
         
         //cell.accessoryType = .DisclosureIndicator
-        
+        cell.backgroundColor = UIColor.clearColor()
         let room = itemNames[indexPath.row]
         cell.textLabel!.text = room.valueForKey("name") as? String
         let cellname = room.valueForKey("name") as? String
