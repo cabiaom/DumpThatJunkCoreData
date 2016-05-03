@@ -12,11 +12,11 @@ class MenuTableViewController: UITableViewController {
     
     //var coreDataStack: CoreDataStack!
     
-    var menuNames = ["Inventory","Search","Notifications","About"]
+    var menuNames = ["Inventory","Search","Future Notifications","About","Expired Boxes"]
     var menuPictures = ["contract",
                         "magnifying-glass",
                         "ring",
-                        "notepad"]
+                        "notepad", "clock"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,9 @@ class MenuTableViewController: UITableViewController {
         if indexPath.row == 3{
             self.performSegueWithIdentifier("AboutSegue", sender: self)
         }
-        
+        if indexPath.row == 4{
+            self.performSegueWithIdentifier("ExpiredSegue", sender: self)
+        }
     }
     
    

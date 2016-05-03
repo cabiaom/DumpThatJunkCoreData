@@ -21,6 +21,7 @@ class NotificationsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        title = "Future Notifications"
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,6 +91,40 @@ class NotificationsTableViewController: UITableViewController {
 
         return cell
     }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let deleteClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            print("Delete closure called")
+            let row = indexPath.row
+            if  let notification = self.notifications?[row]{
+                UIApplication.sharedApplication().cancelLocalNotification(notification)
+                self.notifications = UIApplication.sharedApplication().scheduledLocalNotifications
+                tableView.reloadData()
+            }
+        }
+        /*
+        let editClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+            print("Edit closure called")
+            //self.showEditNameAlert(atIndex: indexPath.row)
+        }
+        
+         let pictureClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
+         print("Picture closure called")
+         }
+         */
+        let deleteAction = UITableViewRowAction(style: .Default, title: "Delete", handler: deleteClosure)
+        //let editAction = UITableViewRowAction(style: .Normal, title: "Edit", handler: editClosure)
+        //let pictureAction = UITableViewRowAction(style: .Normal, title: "Picture", handler: pictureClosure)
+        
+        return [deleteAction] //, editAction, pictureAction]
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // Intentionally blank. Required to use UITableViewRowActions
+    }
+    
     /*
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let row = indexPath.row

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF1170321CD7FD4800A92772 /* ExpiredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1170311CD7FD4800A92772 /* ExpiredTableViewController.swift */; };
 		CF32FF2B1CC031CB00F34AE8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */; };
 		CF8854311C85439E00373A68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8854301C85439E00373A68 /* AppDelegate.swift */; };
 		CF8854361C85439E00373A68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF8854341C85439E00373A68 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF1170311CD7FD4800A92772 /* ExpiredTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiredTableViewController.swift; sourceTree = "<group>"; };
 		CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CF87232B1CA9059900640297 /* DumpThatJunkCoreData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DumpThatJunkCoreData 2.xcdatamodel"; sourceTree = "<group>"; };
 		CF88542D1C85439E00373A68 /* DumpThatJunkCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DumpThatJunkCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 				CF32FF2A1CC031CB00F34AE8 /* SearchViewController.swift */,
 				CFE9630A1CD725830058FEB5 /* NotificationsTableViewController.swift */,
 				CFE9630E1CD737520058FEB5 /* AboutViewController.swift */,
+				CF1170311CD7FD4800A92772 /* ExpiredTableViewController.swift */,
 			);
 			path = DumpThatJunkCoreData;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				CF8854311C85439E00373A68 /* AppDelegate.swift in Sources */,
 				CFF1C7DF1C93A17D008407C5 /* AddTableViewController.swift in Sources */,
 				CFAA06F81CC57EBA00F18B66 /* Item+CoreDataProperties.swift in Sources */,
+				CF1170321CD7FD4800A92772 /* ExpiredTableViewController.swift in Sources */,
 				CFAA06F61CC57EBA00F18B66 /* Location+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,8 +34,6 @@ class BoxTableViewController: UITableViewController {
 
     @IBOutlet weak var onTableViewBoxCell: UITableView!
     
-    
-    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         
         let deleteClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
