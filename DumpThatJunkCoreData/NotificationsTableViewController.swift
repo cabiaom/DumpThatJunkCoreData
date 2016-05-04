@@ -15,6 +15,8 @@ class NotificationsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.937, green: 0.584, blue: 0.616, alpha: 1)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,6 +55,7 @@ class NotificationsTableViewController: UITableViewController {
         let fireDate = (notifications![row].fireDate)!
         let dateString = NSDateFormatter.localizedStringFromDate(fireDate, dateStyle: .ShortStyle, timeStyle: .LongStyle)
         cell.textLabel?.text = "Notification at " + dateString
+        cell.backgroundColor = UIColor.clearColor()
         
         let keyUserInfo = notifications![row].userInfo as![String:NSNumber]
         let key = keyUserInfo["w00t"]! as NSNumber

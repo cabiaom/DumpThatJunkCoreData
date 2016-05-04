@@ -20,6 +20,8 @@ class MenuTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.863, green: 0.863, blue: 0.867, alpha: 1)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -51,6 +53,8 @@ class MenuTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath)
         
         cell.textLabel?.text = menuNames[indexPath.row]
+        
+        cell.backgroundColor = UIColor.clearColor()
         
         cell.imageView?.image = UIImage(named: menuPictures[indexPath.row])
         

@@ -29,6 +29,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         searchBar.delegate = self
         
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.922, green: 0.71, blue: 0.545, alpha: 1)
+        
         fetchAllLocations()
         
     }
@@ -122,6 +124,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         //}
         
+        cell.backgroundColor = UIColor.clearColor()
         
         let appDelegate    = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext

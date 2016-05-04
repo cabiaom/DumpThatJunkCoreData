@@ -18,6 +18,8 @@ class ExpiredTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 1, green: 0.898, blue: 0.851, alpha: 1)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -155,17 +157,25 @@ class ExpiredTableViewController: UITableViewController {
         
         tableView.separatorInset = UIEdgeInsetsZero
         
+        cell.backgroundColor = UIColor.clearColor()
+        
         //cell.accessoryType = .DisclosureIndicator
         
         // box name
         let room = boxNames[indexPath.row]
         let name = room.valueForKey("name") as? String
+        // box modified date
         let dateNS = room.valueForKey("dateModified") as? NSDate
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MMM dd, yyyy"
         let dateString = dateFormatter.stringFromDate(dateNS!)
-        cell.textLabel!.text = name! 
-        cell.detailTextLabel?.text = "EXPIRED: "+dateString
+        // box location
+        
+        let location = room.valueForKey("location") as! Location
+        let locationName = location.name
+        
+        cell.textLabel!.text = name!
+        cell.detailTextLabel?.text = "EXPIRED: " + dateString + ", LOCATION: " + locationName!
         
         return cell
     }

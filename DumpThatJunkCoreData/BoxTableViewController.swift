@@ -236,7 +236,7 @@ class BoxTableViewController: UITableViewController {
         
         title = locationName
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 1.741, green: 0.804, blue: 0.663, alpha: 1)
+        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.784, green: 0.835, blue: 0.725, alpha: 1)
         
         print("Enter Box view with ID: \(idOfLocation)")
     }
