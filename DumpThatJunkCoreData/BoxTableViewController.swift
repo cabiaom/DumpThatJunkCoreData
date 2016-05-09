@@ -107,6 +107,8 @@ class BoxTableViewController: UITableViewController {
             print("Some error in fetching queries.")
         }
         
+        fetchAllBoxes()
+        
     }
     
     func showEditNameAlert(atIndex theIndex : Int)
@@ -220,6 +222,8 @@ class BoxTableViewController: UITableViewController {
         }
         
         boxNames.append(unit)
+        
+        fetchAllBoxes()
     }
 
     override func didMoveToParentViewController(parent: UIViewController?) {

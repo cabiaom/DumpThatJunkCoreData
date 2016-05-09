@@ -102,6 +102,8 @@ class ItemTableViewController: UITableViewController {
             print("Some error in fetching queries.")
         }
         
+        fetchAllItems()
+        
     }
     
     func showEditNameAlert(atIndex theIndex : Int)
@@ -225,6 +227,8 @@ class ItemTableViewController: UITableViewController {
         }
         
         itemNames.append(item)
+        
+        fetchAllItems()
         
     }
 

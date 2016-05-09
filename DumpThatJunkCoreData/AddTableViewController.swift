@@ -180,6 +180,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         //idOfLocation = date
         //locationToUnitObject = itemLocation
         itemNames.append(itemLocation)
+        fetchAllLocations()
     }
     
     override func viewDidLoad() {
@@ -339,6 +340,8 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         {
             print("Some error in fetching queries.")
         }
+        
+        fetchAllLocations()
         
     }
     
