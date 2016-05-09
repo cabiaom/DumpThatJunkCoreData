@@ -4,6 +4,7 @@
 //
 //  Created by Mark CABIAO on 5/2/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
+//  Some code adapted from http://agstya.com/core-data-tutorial-in-swift-2-0
 //
 
 import UIKit
@@ -19,7 +20,7 @@ class ExpiredTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 1, green: 0.898, blue: 0.851, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 1, green: 0.898, blue: 0.851, alpha: 1)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -112,7 +113,7 @@ class ExpiredTableViewController: UITableViewController {
         let locationIdPredicate = NSPredicate(format: "%K < %@", "dateModified" , calculatedDate!)
         fetchRequest.predicate = locationIdPredicate
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do{

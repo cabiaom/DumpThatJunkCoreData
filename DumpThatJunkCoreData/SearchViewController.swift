@@ -4,7 +4,7 @@
 //
 //  Created by Mark CABIAO on 4/14/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
-//
+//  Code adapted from http://shrikar.com/swift-ios-tutorial-uisearchbar-and-uisearchbardelegate/
 
 import UIKit
 import CoreData
@@ -29,9 +29,11 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         searchBar.delegate = self
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.922, green: 0.71, blue: 0.545, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.922, green: 0.71, blue: 0.545, alpha: 1)
         
         fetchAllLocations()
+        
+        title = "Search"
         
     }
     
@@ -40,7 +42,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Item")
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do{
@@ -138,7 +140,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
             let predicate = NSPredicate(format: "%K == %@", "name", key)
             fetchRequest.predicate = predicate
             
-            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
             fetchRequest.sortDescriptors = [sortDescriptor]
             
             do

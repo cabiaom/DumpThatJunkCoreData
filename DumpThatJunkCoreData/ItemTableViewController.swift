@@ -4,6 +4,7 @@
 //
 //  Created by Mark CABIAO on 3/19/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
+//  Code adapted from Table views http://agstya.com/core-data-tutorial-in-swift-2-0/
 //
 
 import UIKit
@@ -237,7 +238,7 @@ class ItemTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.498, green: 0.706, blue: 0.596, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.498, green: 0.706, blue: 0.596, alpha: 1)
         
         title = unitName
     }
@@ -263,7 +264,7 @@ class ItemTableViewController: UITableViewController {
         let locationIdPredicate = NSPredicate(format: "%K == %@", "unit.unitID" , idOfBoxUnit!)
         fetchRequest.predicate = locationIdPredicate
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do{

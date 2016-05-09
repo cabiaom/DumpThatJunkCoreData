@@ -4,6 +4,7 @@
 //
 //  Created by Mark CABIAO on 3/14/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
+//  Table views http://agstya.com/core-data-tutorial-in-swift-2-0/
 //
 
 import UIKit
@@ -67,7 +68,7 @@ class BoxTableViewController: UITableViewController {
         let predicate = NSPredicate(format: "location.locationID == %@", idOfLocation! )
         fetchRequest.predicate = predicate
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do
@@ -236,7 +237,7 @@ class BoxTableViewController: UITableViewController {
         
         title = locationName
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.784, green: 0.835, blue: 0.725, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.784, green: 0.835, blue: 0.725, alpha: 1)
         
         print("Enter Box view with ID: \(idOfLocation)")
     }
@@ -262,7 +263,7 @@ class BoxTableViewController: UITableViewController {
         let locationIdPredicate = NSPredicate(format: "%K == %@", "location.locationID" , idOfLocation!)
         fetchRequest.predicate = locationIdPredicate
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do{
@@ -344,7 +345,7 @@ class BoxTableViewController: UITableViewController {
         let locationIdPredicate = NSPredicate(format: "%K == %@", "location.locationID" , idOfLocation!)
         fetchRequest.predicate = locationIdPredicate
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do

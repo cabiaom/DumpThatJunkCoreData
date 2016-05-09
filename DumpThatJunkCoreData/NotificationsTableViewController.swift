@@ -4,6 +4,8 @@
 //
 //  Created by Mark CABIAO on 5/1/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
+//  Some code adapted from http://agstya.com/core-data-tutorial-in-swift-2-0
+//  also https://www.hackingwithswift.com/read/21/2/scheduling-notifications-uilocalnotification
 //
 
 import UIKit
@@ -16,7 +18,7 @@ class NotificationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.937, green: 0.584, blue: 0.616, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.937, green: 0.584, blue: 0.616, alpha: 1)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

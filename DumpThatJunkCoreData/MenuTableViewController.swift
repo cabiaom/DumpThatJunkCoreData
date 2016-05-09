@@ -12,16 +12,16 @@ class MenuTableViewController: UITableViewController {
     
     //var coreDataStack: CoreDataStack!
     
-    var menuNames = ["Inventory","Search","Future Notifications","About","Expired Boxes"]
+    var menuNames = ["Inventory","Search","Future Notifications","Expired Boxes","About"]
     var menuPictures = ["contract",
                         "magnifying-glass",
                         "ring",
-                        "notepad", "clock"]
+                        "clock","notepad"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.863, green: 0.863, blue: 0.867, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.863, green: 0.863, blue: 0.867, alpha: 1)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -76,10 +76,10 @@ class MenuTableViewController: UITableViewController {
             
             self.performSegueWithIdentifier("NotificationSegue", sender: self)
         }
-        if indexPath.row == 3{
+        if indexPath.row == 4{
             self.performSegueWithIdentifier("AboutSegue", sender: self)
         }
-        if indexPath.row == 4{
+        if indexPath.row == 3{
             self.performSegueWithIdentifier("ExpiredSegue", sender: self)
         }
     }

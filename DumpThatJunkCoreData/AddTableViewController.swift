@@ -4,6 +4,7 @@
 //
 //  Created by Mark CABIAO on 3/11/16.
 //  Copyright © 2016 Mark CABIAO. All rights reserved.
+//  Table views http://agstya.com/core-data-tutorial-in-swift-2-0/
 //
 
 import UIKit
@@ -40,7 +41,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         let managedContext = appDelegate!.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Location")
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do{
@@ -191,7 +192,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         //title = "Locations"
-        tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.973, green: 0.945, blue: 0.827, alpha: 1)
+        //tableView.backgroundColor = UIColor.init(colorLiteralRed: 0.973, green: 0.945, blue: 0.827, alpha: 1)
         onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         //onTableViewCell.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AddCell")
         configureView()
@@ -281,7 +282,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Location")
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do
@@ -310,7 +311,7 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest   = NSFetchRequest(entityName: "Location")
         
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do
