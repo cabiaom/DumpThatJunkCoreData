@@ -95,11 +95,12 @@ class BoxTableViewController: UITableViewController {
                 catch{
                     print("There is some error.")
                 }
-                
+                /*
                 if boxNames.contains(personToUpdate){
                     boxNames.replaceRange(theIndex...theIndex, with: [personToUpdate])
                     self.onTableViewBoxCell.reloadData()
                 }
+ */
             }
         }
         catch

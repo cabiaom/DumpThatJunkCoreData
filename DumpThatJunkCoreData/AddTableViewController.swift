@@ -329,11 +329,12 @@ class AddTableViewController: UITableViewController, UIImagePickerControllerDele
                 catch{
                     print("There is some error.")
                 }
-                
+                /*
                 if itemNames .contains(personToUpdate){
                     itemNames.replaceRange(theIndex...theIndex, with: [personToUpdate])
                     self.onTableViewCell.reloadData()
                 }
+ */
             }
         }
         catch

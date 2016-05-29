@@ -37,6 +37,7 @@ class ItemTableViewController: UITableViewController {
         let editClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
             print("Edit closure called")
             self.showEditNameAlert(atIndex: indexPath.row)
+            print("\(indexPath.row)")
         }
         /*
          let pictureClosure = { (action: UITableViewRowAction!, indexPath: NSIndexPath!) -> Void in
@@ -60,11 +61,18 @@ class ItemTableViewController: UITableViewController {
         let predicate = NSPredicate(format: "unit.unitID == %@", idOfBoxUnit! )
         fetchRequest.predicate = predicate
         
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
         // set time for unit because unit was edited
         let todaysDate = NSDate()
         unitObject?.setValue(todaysDate, forKey: "dateModified")
         scheduleLocalnotification()
         print("date updated EDIT: \(todaysDate)")
+        
+        print(" before: ")
+        
+        //print(itemNames)
         
         do
         {
@@ -72,11 +80,14 @@ class ItemTableViewController: UITableViewController {
             
             if let theResult = fetchResult{
                 
+                print (theResult)
+                print (itemNames)
+                
                 let personToUpdate = theResult[theIndex] as NSManagedObject
                 
                 let oldName = personToUpdate.valueForKey("name") as? String
                 
-                print ("count: \(itemNames.count)")
+                print ("The index: \(theIndex)")
                 
                 print("Old name: \(oldName)")
                 
@@ -90,17 +101,20 @@ class ItemTableViewController: UITableViewController {
                 catch{
                     print("There is some error.")
                 }
-                
+                /*
                 if itemNames.contains(personToUpdate){
                     itemNames.replaceRange(theIndex...theIndex, with: [personToUpdate])
                     self.onTableViewItemCell.reloadData()
                 }
+ */
             }
         }
         catch
         {
             print("Some error in fetching queries.")
         }
+        print(" after: ")
+        //print(itemNames)
         
         fetchAllItems()
         

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Automatic">
     <entity name="BoxUnit" representedClassName=".BoxUnit" syncable="YES">
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unitDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unitID" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="unit" inverseEntity="Item" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="unit" inverseEntity="Item" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="units" inverseEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES">
@@ -13,13 +13,13 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="qty" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="thumbnail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Thumbnail" inverseName="fullRes" inverseEntity="Thumbnail" syncable="YES"/>
+        <relationship name="thumbnail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Thumbnail" inverseName="fullRes" inverseEntity="Thumbnail" syncable="YES"/>
         <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BoxUnit" inverseName="items" inverseEntity="BoxUnit" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES">
         <attribute name="locationID" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="units" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BoxUnit" inverseName="location" inverseEntity="BoxUnit" syncable="YES"/>
+        <relationship name="units" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BoxUnit" inverseName="location" inverseEntity="BoxUnit" syncable="YES"/>
     </entity>
     <entity name="Thumbnail" representedClassName=".Thumbnail" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -27,9 +27,9 @@
         <relationship name="fullRes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thumbnail" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BoxUnit" positionX="-279" positionY="-198" width="128" height="135"/>
-        <element name="Item" positionX="-477" positionY="-54" width="128" height="135"/>
-        <element name="Location" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="Thumbnail" positionX="-243" positionY="-45" width="128" height="90"/>
+        <element name="BoxUnit" positionX="-279" positionY="-198" width="128" height="133"/>
+        <element name="Item" positionX="-477" positionY="-54" width="128" height="133"/>
+        <element name="Location" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Thumbnail" positionX="-252" positionY="108" width="128" height="90"/>
     </elements>
 </model>
